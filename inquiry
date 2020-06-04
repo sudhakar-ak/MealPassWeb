@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Inquiry</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+			<!-- Banner1 -->
+			<section id="banner1">
+				<h1>Welcome to MealPass application</h1>
+				<p> Inquire Data </p>
+			</section>
+
+	<body class="subpage">
+		<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-database.js"></script>
+		<script>
+			var firebaseConfig = {
+				apiKey: "AIzaSyA_LlIAomWwRU82xU2VNrryJrz_o2VthB4",
+			  authDomain: "final-mealpass.firebaseio.com",
+			  databaseURL: "https://final-mealpass.firebaseio.com/",
+			  projectId: "final-mealpass",
+			  storageBucket: "final-mealpass.appspot.com",
+			  messagingSenderId: "1016557463697",
+			  appId: "1:1016557463697:android:7957c5afb0d3beffb77730"
+			  // measurementId: "G-LO9TGRESEED"
+			};
+			firebase.initializeApp(firebaseConfig);
+		  </script>
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<a href="index.html" class="logo">Home</a>
+					<nav id="nav">
+						<a style="font-size:110%;color:white;" href="index.html">Home</a>
+						<!-- <a href="generic.html">Generic</a> -->
+						<a style="font-size:110%;color:white;"href="generic.html">Add/Insert</a>
+					</nav>
+					<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+				</div>
+			</header>
+
+			<section id="three" class="wrapper">
+				<div class="inner">
+					<header class="align-center">
+						<h2>Inquire</h2>
+						<p>#OnTheGo</p>
+					</header>
+			<div class="flex flex-2">
+				<article>
+					<div class="image fit">
+						<!-- <img src="images/pic01.jpg" alt="Pic 01" /> -->
+					</div>
+					<header>
+						<h3>Enter Details here</h3>
+					</header>
+					<p>
+						<input type = "text" placeholder= "EID" id = "EIDfield"> <br>
+						<button onclick="inquiredata(EIDfield)">Submit </button>
+					</article>
+
+					<article>
+						<div class="table-wrapper">
+							<table class="alt">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Employee ID</td>
+										<td><span id="Eidvar"></span></td>
+									</tr>
+									<tr>
+										<td>Employee PIN</td>
+										<td><span id="PINvar"></span></td>
+									</tr>
+									<tr>
+										<td>Phone Number</td>
+										<td> <span id="Phone"></span></td>
+									</tr>
+									<tr>
+										<td>Last Used Meal coupon</td>
+										<td><span id="Mealstoken"></span></td>
+									</tr>
+									<tr>
+										<td>Last Used Snacks coupon</td>
+										<td><span id="snackstoken"></span></td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<td colspan="2"></td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</article>
+						<h1>
+							<a style="font-size:150%;color:black;">
+							<span id="Message"></span>
+						</a> 
+						</h1>
+					</p>
+				</article>
+			</div>
+		</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<div class="flex">
+						<div class="copyright">
+							&copy; Designed by avengers </a>.
+						</div>
+						<ul class="icons">
+							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon fa-linkedin"><span class="label">linkedIn</span></a></li>
+							<li><a href="#" class="icon fa-pinterest-p"><span class="label">Pinterest</span></a></li>
+							<li><a href="#" class="icon fa-vimeo"><span class="label">Vimeo</span></a></li>
+						</ul>
+					</div>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script>
+				function inquiredata(EIDfield) {
+				var Message = "Data fetched successfully";
+				var errorMessage = "Inquiry failed!!";
+				var fireHeading = document.getElementById("fireHeading");
+				var EIDfield = document.getElementById("EIDfield").value;
+				var ref = firebase.database().ref("Passdata/E" + EIDfield);
+				ref.once("value", function(snapshot){
+				var data = snapshot.val();
+				if(data != null) {
+					var EID = data.EID;
+					var PIN = data.PIN;
+					var PHONE = data.PHONE;
+					var USEDDATE = data.USEDDATE;
+					var USEDDATE1 = data.USEDDATE1;
+					console.log(Message)
+					document.getElementById("Message").innerHTML = Message;
+					document.getElementById("Eidvar").innerHTML = EID;
+					document.getElementById("PINvar").innerHTML = PIN;
+					document.getElementById("Phone").innerHTML = PHONE;
+					document.getElementById("Mealstoken").innerHTML = USEDDATE;
+					document.getElementById("snackstoken").innerHTML = USEDDATE1;
+    			}
+    			else {
+        			console.log(errorMessage)
+					document.getElementById("Message").innerHTML = errorMessage;
+    			}
+				});
+				}
+			</script> 
+	</body>
+</html>
