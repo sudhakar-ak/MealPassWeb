@@ -1,43 +1,28 @@
- ![icon](assets/logo.png)
+ ![icon](icon.png)
 
-Omni-Notes
-==========
+FIS MealPass
+============
 
-![SLicense](https://img.shields.io/badge/License-GPLv3-red.svg)
-[![Crowdin](https://d322cqt584bo4o.cloudfront.net/omni-notes/localized.png)](https://crowdin.com/project/omni-notes)
-[![Build Status](https://travis-ci.org/federicoiosue/Omni-Notes.svg?branch=develop)](https://travis-ci.org/federicoiosue/Omni-Notes)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8ade707d00ef468fa79d3f6b622444b5)](https://www.codacy.com/app/federico-iosue/Omni-Notes?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=federicoiosue/Omni-Notes&amp;utm_campaign=Badge_Grade)
-[![GitHub release](https://img.shields.io/github/release/federicoiosue/omni-notes.svg)](https://github.com/federicoiosue/Omni-Notes/releases/latest)
+Generate food coupons <b>#On-The-Go</b> aiming to <b>go green</b> by reducing paper consumption and <b>reduce manual effort</b> every month and ensuring hassle-free dining experience.
 
-Note taking <b>open-source</b> application aimed to have both a <b>simple interface</b> but keeping <b>smart</b> behavior.
+The project was inspired by the absence of such applications. It aims to <b>digitalize the way mealpasses are utilized</b> so far.
 
-The project was inspired by the absence of such applications compatible with old phones and old versions of Android. It aims to provide an attractive look and follow the most recent design guidelines of the Google operating system.
-
-**Follow the developments and post your comments and advice on Facebook Community at https://www.facebook.com/OmniNotes**
-
-*Help to keep translations updated is always welcome, if you want give a hand checkout the translation project on **https://translate.omninotes.app.** *
-
-<a href="https://f-droid.org/repository/browse/?fdid=it.feio.android.omninotes.foss" target="_blank">
-<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="90"/></a>
-<a href="https://play.google.com/store/apps/details?id=it.feio.android.omninotes" target="_blank">
-<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="90"/></a>
-
-## Features
+## Features of Android App
 
 Currently the following functions are implemented:
 
 * Material Design interface
-  *Basic add, modify, archive, trash and delete notes actions
-* Share, merge and search notes
-* Image, audio and generic file attachments
-* Manage your notes using tags and categories
-* To-do list
-* Sketch-note mode
-* Notes shortcut on home screen
-* Export/import notes to backup
-* Google Now integration: just tell "write a note" followed by the content
-* Multiple widgets, DashClock extension, Android 4.2 lockscreen compatibility
-* Multilanguage: 30+ languages supported: https://crowdin.com/project/omni-notes
+* Seperate Logon options for both Employees and Vendor.
+<b>* Features for Employee Login</b>
+    * Eligible employees are provided with option to register themselves
+    by verifying their E-ID and mobile number registered with FIS.
+    * The above will be done using OTP verification.
+    * Post OTP verification, employees will be allowed to set their PIN.
+    * Employees need to login using their EID and PIN.
+    * After logging in, options to generate Meal/Snack pass will be available.
+    * The Meal/Snack pass will be generated once in a day and 
+    will expire after 60 seconds to avoid reusability.
+    * Users are also provided with feedback option about their meal.
 
 
 Further developments will include:
