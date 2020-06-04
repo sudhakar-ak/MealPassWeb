@@ -1,0 +1,224 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Report</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+			<!-- Banner1 -->
+			<section id="banner1">
+				<h1>Welcome to MealPass application</h1>
+				<p> Report Dashboard </p>
+			</section>
+
+	<body class="subpage">
+		<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-database.js"></script>
+		<script>
+			var firebaseConfig = {
+                apiKey: "AIzaSyA_LlIAomWwRU82xU2VNrryJrz_o2VthB4",
+			  authDomain: "final-mealpass.firebaseio.com",
+			  databaseURL: "https://final-mealpass.firebaseio.com/",
+			  projectId: "final-mealpass",
+			  storageBucket: "final-mealpass.appspot.com",
+			  messagingSenderId: "1016557463697",
+			  appId: "1:1016557463697:android:7957c5afb0d3beffb77730"
+			  // measurementId: "G-LO9TGRESEED"
+			};
+			firebase.initializeApp(firebaseConfig);
+		  </script>
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<a href="index.html" class="logo">Home</a>
+					<nav id="nav">
+						<a style="font-size:110%;color:white;" href="index.html">Home</a>
+						<!-- <a href="generic.html">Generic</a> -->
+					</nav>
+					<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+				</div>
+			</header>
+
+			<section id="three" class="wrapper">
+				<div class="inner">
+					<header class="align-center">
+						<h2>Daily/monthly Report Dashboard</h2>
+						<p>#OnTheGo</p>
+					</header>
+			<div class="flex flex-2">
+			
+					<article>
+						<div class="table-wrapper">
+                            <header>
+                                <h3>Monthly Report</h3>
+                            </header>
+							<table class="alt">
+                                                                                           
+								<tbody>
+									<tr>
+										<td>No. of Meal Coupon used current month</td>
+										<td><span id="mmcountvar"></span></td>
+									</tr>
+									<tr>
+										<td>No. of Snack Coupon used current month</td>
+										<td><span id="mscountvar"></span></td>
+									</tr>
+																		
+                                </tbody>
+                             
+								<tfoot>
+
+                                  
+									<tr>
+										<td colspan="2"></td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+                    </article>
+                    <article>
+						<div class="table-wrapper">
+                            <header>
+                                <h3>Daily Report</h3>
+                            </header>
+							<table class="alt">
+								<tbody>
+									<tr>
+										<td>No. of Meal Coupon used today</td>
+										<td><span id="dmcountvar"></span></td>
+									</tr>
+									<tr>
+										<td>No. of Snack Coupon used today</td>
+										<td><span id="dscountvar"></span></td>
+									</tr>
+																		
+								</tbody>
+								
+										
+								<tfoot>
+									<tr>
+										<td colspan="2"></td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</article>
+						<h1>
+							<a style="font-size:150%;color:black;">
+                            <span id="Message"></span>
+                            <span id="Message1"></span>
+						</a> 
+						</h1>
+					</p>
+                </article>
+                <article>
+                    <button onclick="inquiremonthlydata()">Get Report</button>
+            </article>
+            <article>
+                <button onclick="inquiredailydata()">Get Report</button>
+        </article>
+			</div>
+		</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<div class="flex">
+						<div class="copyright">
+							&copy; Designed by avengers </a>.
+						</div>
+						<ul class="icons">
+							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon fa-linkedin"><span class="label">linkedIn</span></a></li>
+							<li><a href="#" class="icon fa-pinterest-p"><span class="label">Pinterest</span></a></li>
+							<li><a href="#" class="icon fa-vimeo"><span class="label">Vimeo</span></a></li>
+						</ul>
+					</div>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script>
+				function inquiremonthlydata() {
+				var Message = "Data fetched successfully";
+                var emptymsg1="";
+				var errorMessage = "Inquiry failed!!";
+				var fireHeading = document.getElementById("fireHeading");
+				var ref = firebase.database().ref().child('Feedback').child('meals');
+				ref.once("value", function(snapshot){
+				var data = snapshot.val();
+				if(data != null) {
+                    var mmcount = data.MCOUNT;
+                    var ddmcount = data.COUNT;
+                    var dbRef1 = firebase.database().ref().child('Feedback').child('snacks');
+                    dbRef1.once("value", function(snapshot){
+                        var data = snapshot.val();
+  
+                        if(data != null) {
+                            var mscount = data.MCOUNT;
+                            var ddscount= data.COUNT;
+                            
+					
+                            console.log(Message)
+                             mmcount = mmcount+ddmcount;
+                             mscount = mscount+ddscount;
+					document.getElementById("mmcountvar").innerHTML = mmcount;
+					document.getElementById("mscountvar").innerHTML = mscount;
+                        }
+                    });
+                }
+    			
+    			else {
+        			console.log(errorMessage)
+					document.getElementById("Message").innerHTML = errorMessage;
+    			}
+                
+				});
+                }
+
+
+
+                                function inquiredailydata() {
+				var Message1 = "Daily Data fetched successfully";
+                var emptymsg="";
+				var errorMessage1 = "Inquiry Daily data failed!!";
+				var fireHeading = document.getElementById("fireHeading");
+				var ref = firebase.database().ref().child('Feedback').child('meals');
+				ref.once("value", function(snapshot){
+				var data = snapshot.val();
+				if(data != null) {
+                    var dmcount = data.COUNT;
+                    var dbRef1 = firebase.database().ref().child('Feedback').child('snacks');
+                    dbRef1.once("value", function(snapshot){
+                        var data = snapshot.val();
+  
+                        if(data != null) {
+                            var dscount = data.COUNT;
+					
+                            console.log(Message)
+					
+					document.getElementById("dmcountvar").innerHTML = dmcount;
+					document.getElementById("dscountvar").innerHTML = dscount;
+                        }
+                    });
+                }
+    			
+    			else {
+        			console.log(errorMessage1)
+					document.getElementById("Message1").innerHTML = errorMessage1;
+    			}
+                
+				});
+                }
+
+            </script> 
+           
+	</body>
+</html>
